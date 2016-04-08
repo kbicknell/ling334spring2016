@@ -1,0 +1,303 @@
+Last login: Wed Apr  6 14:11:58 on ttys000
+dhcp-10-105-77-105:~ kbicknell$ ssh hardin.it.northwestern.edu
+kob734@hardin.it.northwestern.edu's password: 
+Last login: Thu Apr  7 11:46:06 2016 from dhcp-129-105-58-242.ling.northwestern.edu
+
+This system is for the use of authorized users only.  Individuals using
+this computer system without authority or in the excess of their authority
+are subject to having all their activities on this system monitored and
+recorded by system personnel.  In the course of monitoring individuals
+improperly using this system or in the course of system maintenance, the
+activities of authorized users may also be monitored.  Anyone using this
+system expressly consents to such monitoring and is advised that if such
+monitoring reveals possible evidence of illegal activity or violation of
+University regulations system personnel may provide the evidence of such
+monitoring to University authorities and/or law enforcement officials.
+
+
+     Northwestern University Social Sciences Computing Cluster
+
+           Academic Technologies / Research Computing
+
+********** ********** ********** ********** ********** ********** **
+  Please run all cpu-intensive jobs (4 hrs +) with the batch system.
+********** ********** ********** ********** ********** ********** **
+
+Please report system anomalies to sscc-support@northwestern.edu
+
+--- Date --  -------------------- Description -------------------------
+Feb 29 2016  Matlab R2015b Installed
+Dec 07 2015  R Upgraded to R-3.2.2
+Sep 04 2015  SAS Studio 3.4 Basic Installed as Upgrade
+Sep 04 2015  SAS Upgraded to 9.4 TS1_M3 and SAS Analytical Products 14.1
+May 11 2015  Mplus 7.31 Upgrade Installed
+Apr 29 2015  Stata/MP 4-core Version 14 Installed
+Apr 17 2015  Stat/Transfer Upgraded to Version 13 on Seldon
+Mar 09 2015  AMPL Announced
+Jan 28 2015  RStudio Application and Server Upgraded to version 0.98.1091
+Mar 27 2014  PBS Pro 12.2.1 Installed
+Feb 18 2013  KNITRO Upgraded to Version 8.1
+Nov 09 2012  Matlab R2012b Installed
+
+------------------------------------------------------------------------
+
+[kob734@hardin ~]$ nano test.py
+[kob734@hardin ~]$ python test.py
+hello world
+[kob734@hardin ~]$ rm test.py 
+[kob734@hardin ~]$ cd ~/nltk_data/corpora/brown
+[kob734@hardin brown]$ 
+[kob734@hardin brown]$ grep mole brown_all.txt 
+I grant that the dog may not be really protective , based on his training , but if you were roaming the streets looking for a purse to snatch or a young lady to molest , how quick would you be to attack a person strolling with a dog ? ?
+The ballet work is on the nose , especially in the opening number by `` The New Ashmolean Marching Society and Students' Conservatory Band '' , along with a fiery and sultry Brazilian fantasia later .
+Although the fatty protein molecules , carried in the blood and partly composed of cholesterol , are water soluble , cholesterol itself is insoluble , and cannot be destroyed by the body .
+Explains Keys : As the fatty protein molecules travel in the bloodstream , they are deposited in the intima , or inner wall of a coronary artery .
+The degree of saturation depends on the number of hydrogen atoms on the fat molecule .
+Mono-unsaturated fats have room for two more hydrogens on each molecule , and the poly-unsaturated fat molecule has room for at least four hydrogens .
+Hardly anyone ashore marked her as she anchored stern-to off Berth 29 on the mole .
+Life has evolved from simple combinations of molecules in the sea to complex combinations in man .
+Will advances in human sciences help us build social structures and governments which will enable us to cope with people as effectively as the primitive combination of protein and nucleic acid built a structure of molecules which enabled it to adapt to a sea of molecular interaction ? ?
+Besides the well-known hydrogen line at 21 cm wavelength , the spectra of extraterrestrial radio sources may contain sharp lines characteristic of other atoms , ions , and small molecules .
+in interstellar gas , concentrations as low as Af molecules per Af may be sufficient , as compared to the Af hydrogen atom's Af required for detection of the 21-cm line .
+therefore , only with precise foreknowledge of the line frequencies is an astronomical search for the radio spectra of these molecules feasible .
+Since conventional methods are insensitive at the low frequencies of these molecular transitions , the paramagnetic resonance method is being used instead .
+The results of the study , based on collision integrals computed from the latest critically evaluated data on intermolecular forces in air , will be reported in the form of a table of viscosity , thermal conductivity , thermal diffusion , and diffusion coefficients at temperatures of 1,000 to 10,000 Af and of logarithm of pressure in atmospheres from Af to Af times normal density .
+Heat transfer by molecular conduction as well as by radiation from the arc column .
+By this method it was determined that the normal pressure exerted by a sample of polybutene ( molecular weight reported to be 770 ) was over half an atmosphere .
+The two fluids which gave the small negative pressures were polybutenes with molecular weights which were stated to be 520 and 300 .
+These are fluids which one would expect to be less viscoelastic or more Newtonian because of their lower molecular weight .
+Af was found to be paramagnetic with three unpaired electrons per chromium atom and a molecular susceptibility of Af , where Af .
+As is well known , detergent actives belong to the chemical class consisting of moderately high molecular weight and highly polar molecules which exhibit the property of forming micelles in solution .
+Related to micelle formation is the technologically important ability of detergent actives to congregate at oil - water interfaces in such a manner that the polar ( or ionized ) end of the molecule is directed towards the aqueous phase and the hydrocarbon chain towards the oily phase .
+The influence of mechanical action on the particles of free soil may be compared to that of kinetic energy on a molecular scale .
+It appears possible to set a lower limit of about Af for the activation energy of the abstraction of a chlorine atom from a carbon tetrachloride molecule by a chlorine atom to form Af radical .
+The rate of the gas phase exchange reaction appears to be proportional to the first power of the absorbed light intensity indicating that the radical intermediates are removed at the walls or by reaction with an impurity rather than by bimolecular radical combination reactions .
+Because of the simplicity of the molecules , isotopic exchange reactions between elemental halogens and the corresponding carbon tetrahalides would appear to offer particularly fruitful possibilities for obtaining unambiguous basic kinetic data .
+A study of their activity on thyroglobulin has shown that thyroxine is not preferentially released and that the degradation proceeds stepwise with the formation of macromolecular intermediates ( Alpers , Petermann and Rall , 1956 ) .
+On the other hand , there are a few antithyroid drugs of this same general type , such as resorcinol , possessing no reducing activity and possibly acting through formation of a complex with molecular iodine .
+We have only to think of Lady Macbeth or the policeman-murderer in Thomas Burke's famous story , `` The Hands Of Mr. Ottermole '' , to realize that hands often call up ideas of crime and punishment .
+Preliminary evidence tentatively indicates that the molecule ( metabolite 1 ) ) is cleaved at a secondary amide bond .
+It was observed that EWC macromolecules are the same diameter ( 15 a. ) but much longer ( up to several microns ) than vertebrate tropocollagen .
+A water-soluble protein of quite low molecular weight ( ca. 10,000 ) has also been found in this system and partly characterized .
+structure and properties of macromolecules
+elasticity of macromolecular networks
+-- One of the principal aims of anionic polymerization techniques is the synthesis of polymers of extremely narrow molecular weight distribution .
+A simple process for the preparation of nearly monodisperse polystyrene of predictable molecular weight has been developed .
+Upon completion of the purging step , additional initiator appropriate for the molecular weight of the sample desired is added , and the system is then warmed to the polymerization temperature , at which the reaction is allowed to go to completion .
+The predictability of the molecular weights was found to be within 10% for the polymers prepared , with Af ratios less than 1.1 .
+The molecular forces holding the coating to the substrate are obviously greater than the cohesive strength of the coating and failure occurs by shear along a plane starting at the tip of the knife and extending to the coating surface .
+More recently , polyethers -- again in varied compositions , molecular weights , and branching -- have come into use at first for the flexible foams , just lately for the rigids .
+Though his inner thoughts cringed at it , he forced himself to think back , recreating the scene in which Mae claimed to have caught him molesting the child .
+( When you see him , you'll notice his habit of fingering , I might almost say , stroking a large mole with black hairs on it , by his right temple .
+If he wondered whether the attackers would allow him to pull away unmolested , he had his answer a moment later .
+They gave the room a strange note of incongruity , like a mole on a beautiful face .
+[kob734@hardin brown]$ egrep 'mole' brown_all.txt 
+I grant that the dog may not be really protective , based on his training , but if you were roaming the streets looking for a purse to snatch or a young lady to molest , how quick would you be to attack a person strolling with a dog ? ?
+The ballet work is on the nose , especially in the opening number by `` The New Ashmolean Marching Society and Students' Conservatory Band '' , along with a fiery and sultry Brazilian fantasia later .
+Although the fatty protein molecules , carried in the blood and partly composed of cholesterol , are water soluble , cholesterol itself is insoluble , and cannot be destroyed by the body .
+Explains Keys : As the fatty protein molecules travel in the bloodstream , they are deposited in the intima , or inner wall of a coronary artery .
+The degree of saturation depends on the number of hydrogen atoms on the fat molecule .
+Mono-unsaturated fats have room for two more hydrogens on each molecule , and the poly-unsaturated fat molecule has room for at least four hydrogens .
+Hardly anyone ashore marked her as she anchored stern-to off Berth 29 on the mole .
+Life has evolved from simple combinations of molecules in the sea to complex combinations in man .
+Will advances in human sciences help us build social structures and governments which will enable us to cope with people as effectively as the primitive combination of protein and nucleic acid built a structure of molecules which enabled it to adapt to a sea of molecular interaction ? ?
+Besides the well-known hydrogen line at 21 cm wavelength , the spectra of extraterrestrial radio sources may contain sharp lines characteristic of other atoms , ions , and small molecules .
+in interstellar gas , concentrations as low as Af molecules per Af may be sufficient , as compared to the Af hydrogen atom's Af required for detection of the 21-cm line .
+therefore , only with precise foreknowledge of the line frequencies is an astronomical search for the radio spectra of these molecules feasible .
+Since conventional methods are insensitive at the low frequencies of these molecular transitions , the paramagnetic resonance method is being used instead .
+The results of the study , based on collision integrals computed from the latest critically evaluated data on intermolecular forces in air , will be reported in the form of a table of viscosity , thermal conductivity , thermal diffusion , and diffusion coefficients at temperatures of 1,000 to 10,000 Af and of logarithm of pressure in atmospheres from Af to Af times normal density .
+Heat transfer by molecular conduction as well as by radiation from the arc column .
+By this method it was determined that the normal pressure exerted by a sample of polybutene ( molecular weight reported to be 770 ) was over half an atmosphere .
+The two fluids which gave the small negative pressures were polybutenes with molecular weights which were stated to be 520 and 300 .
+These are fluids which one would expect to be less viscoelastic or more Newtonian because of their lower molecular weight .
+Af was found to be paramagnetic with three unpaired electrons per chromium atom and a molecular susceptibility of Af , where Af .
+As is well known , detergent actives belong to the chemical class consisting of moderately high molecular weight and highly polar molecules which exhibit the property of forming micelles in solution .
+Related to micelle formation is the technologically important ability of detergent actives to congregate at oil - water interfaces in such a manner that the polar ( or ionized ) end of the molecule is directed towards the aqueous phase and the hydrocarbon chain towards the oily phase .
+The influence of mechanical action on the particles of free soil may be compared to that of kinetic energy on a molecular scale .
+It appears possible to set a lower limit of about Af for the activation energy of the abstraction of a chlorine atom from a carbon tetrachloride molecule by a chlorine atom to form Af radical .
+The rate of the gas phase exchange reaction appears to be proportional to the first power of the absorbed light intensity indicating that the radical intermediates are removed at the walls or by reaction with an impurity rather than by bimolecular radical combination reactions .
+Because of the simplicity of the molecules , isotopic exchange reactions between elemental halogens and the corresponding carbon tetrahalides would appear to offer particularly fruitful possibilities for obtaining unambiguous basic kinetic data .
+A study of their activity on thyroglobulin has shown that thyroxine is not preferentially released and that the degradation proceeds stepwise with the formation of macromolecular intermediates ( Alpers , Petermann and Rall , 1956 ) .
+On the other hand , there are a few antithyroid drugs of this same general type , such as resorcinol , possessing no reducing activity and possibly acting through formation of a complex with molecular iodine .
+We have only to think of Lady Macbeth or the policeman-murderer in Thomas Burke's famous story , `` The Hands Of Mr. Ottermole '' , to realize that hands often call up ideas of crime and punishment .
+Preliminary evidence tentatively indicates that the molecule ( metabolite 1 ) ) is cleaved at a secondary amide bond .
+It was observed that EWC macromolecules are the same diameter ( 15 a. ) but much longer ( up to several microns ) than vertebrate tropocollagen .
+A water-soluble protein of quite low molecular weight ( ca. 10,000 ) has also been found in this system and partly characterized .
+structure and properties of macromolecules
+elasticity of macromolecular networks
+-- One of the principal aims of anionic polymerization techniques is the synthesis of polymers of extremely narrow molecular weight distribution .
+A simple process for the preparation of nearly monodisperse polystyrene of predictable molecular weight has been developed .
+Upon completion of the purging step , additional initiator appropriate for the molecular weight of the sample desired is added , and the system is then warmed to the polymerization temperature , at which the reaction is allowed to go to completion .
+The predictability of the molecular weights was found to be within 10% for the polymers prepared , with Af ratios less than 1.1 .
+The molecular forces holding the coating to the substrate are obviously greater than the cohesive strength of the coating and failure occurs by shear along a plane starting at the tip of the knife and extending to the coating surface .
+More recently , polyethers -- again in varied compositions , molecular weights , and branching -- have come into use at first for the flexible foams , just lately for the rigids .
+Though his inner thoughts cringed at it , he forced himself to think back , recreating the scene in which Mae claimed to have caught him molesting the child .
+( When you see him , you'll notice his habit of fingering , I might almost say , stroking a large mole with black hairs on it , by his right temple .
+If he wondered whether the attackers would allow him to pull away unmolested , he had his answer a moment later .
+They gave the room a strange note of incongruity , like a mole on a beautiful face .
+[kob734@hardin brown]$ egrep 'mole' brown_all.txt | wc
+     43    1252    7201
+[kob734@hardin brown]$ egrep '[Mm]ole' brown_all.txt | wc
+     51    1549    8782
+[kob734@hardin brown]$ egrep '\b[Mm]ole\b' brown_all.txt | wc
+      4      95     461
+[kob734@hardin brown]$ egrep '\b[Mm]ole\b' brown_all.txt     
+Hardly anyone ashore marked her as she anchored stern-to off Berth 29 on the mole .
+R. R. Mole and F. W. Urich give approximately 20 inches as the average length of a brood of thirty from the region of the Orinoco estuaries .
+( When you see him , you'll notice his habit of fingering , I might almost say , stroking a large mole with black hairs on it , by his right temple .
+They gave the room a strange note of incongruity , like a mole on a beautiful face .
+[kob734@hardin brown]$ egrep '\b[A-Z]at\b' brown_all.txt | head
+Ed Delahanty and Chuck Klein of the Phillies , the Braves' Joe Adcock , Lou Gehrig of the Yankees , Pat Seerey of the White Sox and Rocky Colavito , then with Cleveland , made their history on the road .
+Miss Mary Ross of Baird was maid of honor , and bridesmaids were Miss Pat Dawson of Austin , Mrs. Howard M. Dean of Hinsdale , Ill. , and Mrs. James A. Reeder of Shreveport , La. .
+Harry Rolnick , president of the Byer-Rolnick Hat Corporation and designer of men's hats ; ;
+Other capable soloists included David Clifton , Joseph Schockler and Pat Thompson .
+Sat there and as a woman sang , she kept getting thinner and thinner , right before my eyes , and the eyes of some 5,500 other people .
+The man most firmly at grips with the problem is the University of Minnesota's Physiologist Ancel Keys , 57 , inventor of the wartime K ( for Keys ) ration and author of last year's bestselling Eat Well And Stay Well .
+Eat in a restaurant or motel mornings and evenings ; ;
+Fat bottles , such as Burgundies , have a way of rolling around in the bin and often need little props , such as a bit of cardboard or a chip of wood , to hold them in the proper reclining posture .
+He exposed the bucket-shop racket with the able assistance of two excellent reporters , Nat Ferber and Carl Helm .
+Everyone knows that private detectives in real life are not like Sam Spade and Pat Novak , but the real and the imaginary musician are closely linked .
+[kob734@hardin brown]$ egrep '\bMay [0-9]' brown_all.txt | head -n4
+Dallas , Tex. , May 1 -- ( AP )
+St. Paul-Minneapolis , May 1 -- ( AP )
+Ogden , Utah , May 1 -- ( AP )
+The spectacular Mays , who reaches a decade in the big leagues come May 25 , joined six other sluggers who walloped four home runs in a span of nine innings .
+[kob734@hardin brown]$ egrep '\bMay [0-9]?' brown_all.txt | head -n4
+Sen. Charles W. Sandman , R-Cape May , said today Jones will run well ahead of his GOP opponents for the gubernatorial nomination .
+Dallas , Tex. , May 1 -- ( AP )
+St. Paul-Minneapolis , May 1 -- ( AP )
+Ogden , Utah , May 1 -- ( AP )
+[kob734@hardin brown]$ egrep '\bMay [0-9]+' brown_all.txt | head -n4
+Dallas , Tex. , May 1 -- ( AP )
+St. Paul-Minneapolis , May 1 -- ( AP )
+Ogden , Utah , May 1 -- ( AP )
+The spectacular Mays , who reaches a decade in the big leagues come May 25 , joined six other sluggers who walloped four home runs in a span of nine innings .
+[kob734@hardin brown]$ egrep '\bMay [0-9]*' brown_all.txt | head -n4
+Sen. Charles W. Sandman , R-Cape May , said today Jones will run well ahead of his GOP opponents for the gubernatorial nomination .
+Dallas , Tex. , May 1 -- ( AP )
+St. Paul-Minneapolis , May 1 -- ( AP )
+Ogden , Utah , May 1 -- ( AP )
+[kob734@hardin brown]$ egrep '\b(12)+\b' brown_all.txt | head -n4
+The other bill , by Sen. A. M. Aikin Jr. of Paris , would relieve real estate brokers , who pay their own annual licensing fee , from the $12 annual occupation license on brokers in such as stocks and bonds .
+Rep. Henry C. Grover , who teaches history in the Houston public schools , would reduce from 24 to 12 semester hours the so-called `` teaching methods '' courses required to obtain a junior or senior high school teaching certificate .
+Division three will be headed by the Marines followed by 12 states ; ;
+Consequently , it is uncertain after nearly 12 months in office just which direction the Barnett administration will take in the coming year .
+[kob734@hardin brown]$ egrep '\bmay ([A-Za-z]+ )?have\b' brown_all.txt | head -n4
+`` Actually , the abuse of the process may have constituted a contempt of the Criminal court of Cook county , altho vindication of the authority of that court is not the function of this court '' , said Karns , who is a City judge in East St. Louis sitting in Cook County court .
+Fourteen years is the maximum penalty now faced by the new five , who may have altered history in the 1960s .
+Anyone interested in attending the meeting may have reservations with Mrs. John Whelan at the Hollywood Public Library .
+U. S. willingness to accept a neutral Laos may have led Premier Khrushchev to believe that other areas could be `` neutralized '' on Soviet terms .
+[kob734@hardin brown]$ egrep '\bMay [0-9]+\b' brown_all.txt | head -n4
+Dallas , Tex. , May 1 -- ( AP )
+St. Paul-Minneapolis , May 1 -- ( AP )
+Ogden , Utah , May 1 -- ( AP )
+The spectacular Mays , who reaches a decade in the big leagues come May 25 , joined six other sluggers who walloped four home runs in a span of nine innings .
+[kob734@hardin brown]$ egrep '\bMay \d+\b' brown_all.txt | head -n4
+[kob734@hardin brown]$ egrep '\b\w+\b' brown_all.txt | head -n4
+The Fulton County Grand Jury said Friday an investigation of Atlanta's recent primary election produced `` no evidence '' that any irregularities took place .
+The jury further said in term-end presentments that the City Executive Committee , which had over-all charge of the election , `` deserves the praise and thanks of the City of Atlanta '' for the manner in which the election was conducted .
+The September-October term jury had been charged by Fulton Superior Court Judge Durwood Pye to investigate reports of possible `` irregularities '' in the hard-fought primary which was won by Mayor-nominate Ivan Allen Jr. .
+`` Only a relative handful of such reports was received '' , the jury said , `` considering the widespread interest in the election , the number of voters and the size of this city '' .
+[kob734@hardin brown]$ logout
+
+Connection to hardin.it.northwestern.edu closed.
+dhcp-10-105-77-105:~ kbicknell$ python
+Python 2.7.11 (default, Mar  1 2016, 18:40:10) 
+[GCC 4.2.1 Compatible Apple LLVM 7.0.2 (clang-700.1.81)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import re
+>>> re.search
+<function search at 0x100883758>
+>>> from re import search
+>>> search
+<function search at 0x100883758>
+>>> from re import *
+>>> # don't do this
+... 
+>>> re.search(r'bob', 'My friend bob is coming to lunch')
+<_sre.SRE_Match object at 0x100a24bf8>
+>>> results = re.search(r'bob', 'My friend bob is coming to lunch')
+>>> bool(results)
+True
+>>> results = re.search(r'bob', 'My friend bob is coming to lunch')
+>>> if results:
+...     print "I found it!"
+... 
+I found it!
+>>> results = re.search(r'bob', 'My friend Bob is coming to lunch')
+>>> if results:
+...     print "I found it!"
+... 
+>>> results = re.search(r'bob', 'My friend bob is coming to lunch')
+>>> results == True
+False
+>>> bool(results) == True
+True
+>>> results.group(0)
+'bob'
+>>> results = re.search(r'friend [A-Za-z]+ is .+', 'My friend bob is coming to lunch')
+>>> results = re.search(r'friend ([A-Za-z]+) is (.+)', 'My friend bob is coming to lunch')
+>>> results.group(0)
+'friend bob is coming to lunch'
+>>> results.group(1)
+'bob'
+>>> results.group(2)
+'coming to lunch'
+>>> results.group(3)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: no such group
+>>> '\b'
+'\x08'
+>>> '\\b'
+'\\b'
+>>> r'\b'
+'\\b'
+>>> print '\n'
+
+
+>>> print r'\n'
+\n
+>>> x = 10
+>>> if x < 100:
+...     print "it's small"
+... 
+it's small
+>>> if x < 100:
+...     print "it's small"
+... 
+it's small
+>>> if x < 100:
+...     print "it's small"
+... else:
+...     print "it's big"
+... 
+it's small
+>>> x = 1000
+>>> if x < 100:
+...     print "it's small"
+... else:
+...     print "it's big"
+... 
+it's big
+>>> if x < 100:
+...     print "it's small"
+... elif x < 200:
+...     print "it's medium"
+... else:
+...     print "it's big"
+... 
+it's big
+>>> x = {}
+>>> x[10] = 'dog'
+>>> x[10]
+'dog'
+>>> x[9]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 9
+>>> x['cat'] = 100
+>>> x
+{10: 'dog', 'cat': 100}
+>>> 
+dhcp-10-105-77-105:~ kbicknell$ 
