@@ -1,0 +1,116 @@
+---
+title: 'Ling 334: Homework 1'
+author: "Instructor: Klinton Bicknell"
+output:
+  html_document:
+    highlight: pygments
+---
+
+_Turning it in._ In general, homework assignments in this class will involve both short answers and coding. You'll turn in your short answers in PDF form via Canvas. But your code will be 'turned in' by putting it in the `~/ling334/hw1/` folder, which you'll create in problem 0, and running the command `chmod -R g+r ~/ling334/hw1/`{.bash} on the SSCC when you've finished.
+
+# General
+
+* Make sure you have already followed the 'nltk setup' instructions linked on the course website.
+* Remember to list all others you worked with at the top of your assignment.
+* Remember that you must do your own write-up and your own programming.
+
+# Linux
+
+0. **Setting up homework directories.** First, create a `ling334` directory in your SSCC home directory and some subdirectories:
+
+    ```bash
+    mkdir ~/ling334
+    mkdir ~/ling334/hw1
+    mkdir ~/ling334/hw2
+    mkdir ~/ling334/hw3
+    mkdir ~/ling334/hw4
+    mkdir ~/ling334/project
+    ```
+
+    This is where you'll save your homework code that I will grade. So that I have access, next, set the permissions as follows:
+
+    ```bash
+    chmod g=x $HOME
+    chmod -R g=rx ~/ling334
+    ```
+
+1. **Editing files.** Using `nano`{.bash} (or your linux editor of choice like `emacs`{.bash} or `vi`{.bash}), create a file called `aboutme.txt` in your new `ling334/hw1/` directory. In this file, answer the following questions about yourself:
+
+    * What is your linguistics background?
+    * What is your programming background?
+    * What is your probability theory background?
+
+# Regular expressions
+
+2. **Counting words.** In class, we used `egrep`{.bash} to find lines of a file that contained a string matching a particular regular expression. This is useful when wanting to see the context a match occurs in, but it isn't ideal for counting occurrences, because it only counts each line once, even if a line contains multiple matches. So for this problem, we'll make use of the `-o` flag in `egrep`{.bash} to return only the matched string:
+
+    ```bash
+    egrep -o <pattern> <filename>
+    ```
+
+    This will return each match on a separate line. As in class, we can pipe the output of `egrep`{.bash} to `wc`{.bash} to count the number of matches.
+
+    Using this method, you'll count the number of times each of a list of words occurs in the Brown corpus. The full Brown corpus can be found in one file at `$NLTK_DATA/corpora/brown/brown_all.txt`{.bash}. (`$NLTK_DATA`{.bash} is a variable that was defined when you followed the class's nltk setup instructions.) Make sure your regular expressions:
+    
+    * only count whole words ('she' should not be counted for the word 'he')
+    * ignore word-initial capitalization ('She' and 'she' should both be counted)
+    * count singular and plural variants of nouns ('bins' _does_ count for 'bin', but no need to do this for pronouns)
+    
+    You'll save your regular expressions and your results in a file called `problem2.txt` in your `ling334/hw1` directory. There should be one line of this file for each word in the list below. Each line should be formatted containing (a) the word, (b) a space, (c) your regular expression enclosed in slashes, (d) a space, and (e) the number of counts. Make sure your formatting follows this template exactly. For example, two (incorrect) lines could look as follows:
+    
+        cactus /[ca]ctus/ 131
+        app /ap+/ 112351
+
+    Here's the list of words:
+
+        they
+        the
+        nomenclature
+        Pennsylvania
+        himself
+        could
+        would
+        multiplicity
+        almost
+        decentralizing
+        necessarily
+        was
+        have
+        polyethylene
+        temperature
+        with
+        development
+        spectrometer
+        that
+        sockdologizing
+
+    Finally, short answer questions to include in your PDF write up: What general correlation do you see in the counts? What words are examples that break this pattern? Test a few and note whether they do indeed break the pattern. Speculate about why this correlation might emerge in a language system.
+
+3. **Say what?** In English, the verb _say_ can appear with a full sentence (as in 'say it ain't so') or an embedded question (as in 'say what you did' or 'say who you met'). Use `egrep` as in the previous problem to answer the following questions about _say_. Again, save each regular expression and the number of hits it gets in a file called `problem3.txt`. (Answer the other questions in your PDF.)
+
+    * How many times does the past tense verb _said_ occur in the Brown corpus?
+    * When _said_ occurs with a full sentence, it often uses the complementizer _that_. How often does _said_ occur with _that_ immediately following? If we assume that all of these cases are actually the complementizer _that_ (and not, e.g., the pronoun _that_ as in 'I never said that.'), what proportion of the time is _said_ used with the complementizer _that_?
+    * Sometimes, _said_ can be used with the complementizer _that_ but have other words intervening (e.g., 'said yesterday that' or 'said very quietly that'). Modify your regular expression to allow for (but not require) up to two words to intervene between _said_ and _that_. Now what proportion of the time are we estimating that _said_ is used with the complementizer _that_?
+    * Another common usage of _said_ is with an embedded-question. We can get a rough estimate of the number of times _said_ is used with embedded questions by explicitly searching for _said_ occurring immediately prior to a question word (_what_, _who_, _when_, _where_, _how_, _why_, _which_). How many times is _said_ used with each type of embedded question? What proportion of the time is it used with any of these types of embedded question?
+
+# Python
+
+4. **Basic python.** Create a python script called `problem4.py`. In this program, initialize a variable
+
+    ```python
+    sentence = "isn't python so much fun?"
+    ```
+
+    Now, make the script print out each word from `sentence` on a separate line. (Hint: use the string's `split()`{.python} method, a `for`{.python} loop, and the `print`{.python} statement.) Test your script by running `python problem4.py`{.bash} to make sure it works.
+
+5. **Regular expressions in python.** Create `problem5.py` in `ling334/hw1/`. Have the script go through each line of the brown corpus (the single file mentioned above), check whether each line contains at least 3 words that have only the first letter capitalized (don't include words in all-caps) using a single regular expression, and write those lines that do to a file called `browncaps.txt` in `ling334/hw1/`. You must use python's regular expression module `re`{.python} to do this. Write these matching sentences to the file one per line without any blank lines in between. To verify that your script works, run it from the terminal and then look at `browncaps.txt` to verify its output.
+
+    Important note: The first part of the path to the Brown corpus given above with the dollar sign (`$NLTK_DATA`{.bash}) is a shell variable that python doesn't have access to. Instead, you'll need to specify the path to the Brown corpus like this:
+    
+    ```python
+    import nltk
+    brown_filename = nltk.data.path[0] + "/corpora/brown/brown_all.txt"
+    ```
+
+    Now, `brown_filename`{.python} is a string that you can use as the path to the corpus when calling `open`{.python} to read the file.
+    
