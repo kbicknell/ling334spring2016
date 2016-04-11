@@ -101,7 +101,7 @@ _Turning it in._ In general, homework assignments in this class will involve bot
     sentence = "isn't python so much fun?"
     ```
 
-    Now, make the script print out each word from `sentence` on a separate line. (Hint: use the string's `split()`{.python} method, a `for`{.python} loop, and the `print`{.python} statement.) Test your script by running `python problem4.py`{.bash} to make sure it works.
+    Now, make the script print out each word from `sentence`, including any puctuation following it, on a separate line. (Hint: use the string's `split()`{.python} method, a `for`{.python} loop, and the `print`{.python} statement.) Test your script by running `python problem4.py`{.bash} to make sure it works.
 
 5. **Regular expressions in python.** Create `problem5.py` in `ling334/hw1/`. Have the script go through each line of the brown corpus (the single file mentioned above), check whether each line contains at least 3 words that have only the first letter capitalized (don't include words in all-caps) using a single regular expression, and write those lines that do to a file called `browncaps.txt` in `ling334/hw1/`. You must use python's regular expression module `re`{.python} to do this. Write these matching sentences to the file one per line without any blank lines in between. To verify that your script works, run it from the terminal and then look at `browncaps.txt` to verify its output.
 
