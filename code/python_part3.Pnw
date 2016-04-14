@@ -1,0 +1,96 @@
+---
+title: 'Ling 334: Introduction to Python (part 3)'
+author: 'Instructor: Klinton Bicknell'
+output:
+  html_document:
+    highlight: pygments
+---
+
+## Dictionaries
+
+Lists can be thought of as maps from integers to some other objects, such as strings.
+
+<< >>=
+fruits = ['apples', 'pears', 'bananas']
+print(fruits[1])
+@
+
+<< >>=
+fruits[1] = 'kiwis'
+print(fruits[1])
+@
+
+Dictionaries can be thought of as maps between arbitrary types of objects, from _keys_ to _values_.
+
+To create an empty dictionary:
+<< >>=
+favorites = {}
+@
+
+To assign or change key-value pairs:
+<< >>=
+favorites['fruit'] = 'guava'
+favorites['number'] = 11
+favorites['fruit'] = 'banana'
+print(favorites)
+@
+
+With dictionaries, _order is not guaranteed_, but mapping from keys to values is.
+
+One common use of dictionaries is to map words to numbers, to facilitate the storage of properties of words in vectors or matrices. (Regular lists can already store the reverse map, from indices to words.) For example, we might have a list and dictionary pair that store the words _the_, _cat_, and _ran_ as 0, 1, and 2:
+<< >>=
+words = ['the', 'cat', 'ran']
+word_to_index = {'the': 0, 'cat': 1, 'ran': 2}
+@
+
+**Exercise**: Often, we have a list of words (that implicitly maps indices to words) and we want to create a word_to_index map from it. Try writing some code that will create the `word_to_index` map from an arbitrary list `words`.
+
+## Numpy
+
+Numpy is a library for dealing with linear algebra objects like vectors and matrices. It is often imported using the shorter name `np` like this:
+<< >>=
+import numpy as np
+@
+
+To create a 10-element-long (i.e., 10-dimensional) vector of zeros, you simply use the `np.zeros()`{.python} function.
+
+<< >>=
+a_vector = np.zeros(10)
+print(a_vector)
+@
+
+Once created, you can access and change elements of a numpy vector just like you would a list:
+<< >>=
+a_vector[0] = 11
+a_vector[4] = 3
+a_vector[0] += 4
+print(a_vector)
+@
+
+Matrices work similarly, so this code creates a 3 x 5 matrix:
+<< >>=
+a_matrix = np.zeros((3, 5))
+print(a_matrix)
+@
+Note that you need double-parentheses here. (That's because the argument of np.zeros is a _tuple_, a type of data similar to a list, but which cannot be changed. Tuples are enclosed in parentheses instead of brackets like lists are.)
+
+Accessing or changing elements of matrices is also very similar to vectors, except now you need two indices (row and column):
+<< >>=
+a_matrix[0, 0] = 11
+a_matrix[1, 2] = 3
+a_matrix[0, 0] += 4
+print(a_matrix)
+@
+
+Using numpy for these objects (instead of lists) gives us access to some new functions, such as summing all elements
+<< >>=
+print(np.sum(a_vector))
+print(np.sum(a_matrix))
+@
+or adding, subtracting, multiplying, or dividing all elements by a scalar number:
+<< >>=
+print(a_vector)
+print(a_vector + 1)
+print(a_vector * 3)
+print(a_vector / 3)
+@

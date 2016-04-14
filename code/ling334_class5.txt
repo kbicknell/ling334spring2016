@@ -1,0 +1,175 @@
+Last login: Thu Apr 14 12:27:36 on ttys007
+dhcp-10-105-111-73:~ kbicknell$ python
+Python 2.7.11 (default, Mar  1 2016, 18:40:10) 
+[GCC 4.2.1 Compatible Apple LLVM 7.0.2 (clang-700.1.81)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> words = ['the', 'cat', 'ran']
+>>> words_to_index = {'the': 0, 'cat': 1, 'ran': 2}
+>>> words_to_index = {}
+>>> for word in words:
+...     words_to_index[word] = 0
+... 
+>>> for i, word in enumerate(words):
+...     words_to_index[word] = i
+... 
+>>> words_to_index
+{'ran': 2, 'the': 0, 'cat': 1}
+>>> words_to_index['cat']
+1
+>>> import numpy
+>>> import numpy as np
+>>> a_vector = np.zeros(10)
+>>> print(a_vector)
+[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
+>>> a_vector[0] = 11
+>>> a_vector[4] = 3
+>>> a_vector[0] += 4
+>>> print(a_vector)
+[ 15.   0.   0.   0.   3.   0.   0.   0.   0.   0.]
+>>> a_matrix = np.zeros((3,5))
+>>> print(a_matrix)
+[[ 0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.]]
+>>> a_matrix[0, 0] = 11
+>>> a_matrix[1, 2] = 3
+>>> a_matrix[0, 0] += 4
+>>> a_matrix
+array([[ 15.,   0.,   0.,   0.,   0.],
+       [  0.,   0.,   3.,   0.,   0.],
+       [  0.,   0.,   0.,   0.,   0.]])
+>>> print np.sum(a_vector)
+18.0
+>>> print a_vector
+[ 15.   0.   0.   0.   3.   0.   0.   0.   0.   0.]
+>>> print np.sum(a_matrix)
+18.0
+>>> print(a_vector)
+[ 15.   0.   0.   0.   3.   0.   0.   0.   0.   0.]
+>>> print(a_vector + 1)
+[ 16.   1.   1.   1.   4.   1.   1.   1.   1.   1.]
+>>> print (a_vector * 3)
+[ 45.   0.   0.   0.   9.   0.   0.   0.   0.   0.]
+>>> print (a_vector / 3)
+[ 5.  0.  0.  0.  1.  0.  0.  0.  0.  0.]
+>>> a_matrix * a_matrix
+array([[ 225.,    0.,    0.,    0.,    0.],
+       [   0.,    0.,    9.,    0.,    0.],
+       [   0.,    0.,    0.,    0.,    0.]])
+>>> 
+dhcp-10-105-111-73:~ kbicknell$ ssh hardin.it.northwestern.edu
+kob734@hardin.it.northwestern.edu's password: 
+Last login: Thu Apr 14 09:14:30 2016 from dhcp-129-105-58-242.ling.northwestern.edu
+
+This system is for the use of authorized users only.  Individuals using
+this computer system without authority or in the excess of their authority
+are subject to having all their activities on this system monitored and
+recorded by system personnel.  In the course of monitoring individuals
+improperly using this system or in the course of system maintenance, the
+activities of authorized users may also be monitored.  Anyone using this
+system expressly consents to such monitoring and is advised that if such
+monitoring reveals possible evidence of illegal activity or violation of
+University regulations system personnel may provide the evidence of such
+monitoring to University authorities and/or law enforcement officials.
+
+
+     Northwestern University Social Sciences Computing Cluster
+
+           Academic Technologies / Research Computing
+
+********** ********** ********** ********** ********** ********** **
+  Please run all cpu-intensive jobs (4 hrs +) with the batch system.
+********** ********** ********** ********** ********** ********** **
+
+Please report system anomalies to sscc-support@northwestern.edu
+
+--- Date --  -------------------- Description -------------------------
+Feb 29 2016  Matlab R2015b Installed
+Dec 07 2015  R Upgraded to R-3.2.2
+Sep 04 2015  SAS Studio 3.4 Basic Installed as Upgrade
+Sep 04 2015  SAS Upgraded to 9.4 TS1_M3 and SAS Analytical Products 14.1
+May 11 2015  Mplus 7.31 Upgrade Installed
+Apr 29 2015  Stata/MP 4-core Version 14 Installed
+Apr 17 2015  Stat/Transfer Upgraded to Version 13 on Seldon
+Mar 09 2015  AMPL Announced
+Jan 28 2015  RStudio Application and Server Upgraded to version 0.98.1091
+Mar 27 2014  PBS Pro 12.2.1 Installed
+Feb 18 2013  KNITRO Upgraded to Version 8.1
+Nov 09 2012  Matlab R2012b Installed
+
+------------------------------------------------------------------------
+
+[kob734@hardin ~]$ python --version
+Python 2.7.11 :: Anaconda 2.4.1 (64-bit)
+[kob734@hardin ~]$ python
+Python 2.7.11 |Anaconda 2.4.1 (64-bit)| (default, Dec  6 2015, 18:08:32) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+Anaconda is brought to you by Continuum Analytics.
+Please check out: http://continuum.io/thanks and https://anaconda.org
+>>> import nltk
+>>> data_filename = nltk.data.path[0] + 'mini_data_1.csv'
+>>> data_filename
+'/sscc/home/k/kob734/nltk_datamini_data_1.csv'
+>>> data_filename = nltk.data.path[0] + '/mini_data_1.csv'
+>>> data_filename
+'/sscc/home/k/kob734/nltk_data/mini_data_1.csv'
+>>> rf = open(data_filename, 'r')
+>>> rf.close()
+>>> rf = open(data_filename, 'r')
+>>> for line in rf:
+...     print line
+... 
+rt,file
+
+324,ball_female_english.wav
+
+421,bounce_male_mandarin.wav
+
+279,tall_male_english.wav
+
+398,world_female_mandarin.wav
+
+>>> print 'bob'
+bob
+>>> rf.close()
+>>> with open(data_filename, 'r') as rf:
+...     for line in rf:
+...             print line,
+... 
+rt,file
+324,ball_female_english.wav
+421,bounce_male_mandarin.wav
+279,tall_male_english.wav
+398,world_female_mandarin.wav
+>>> with open('blah.txt', 'w') as wf:
+...     wf.write('this is my file\n')
+...     wf.write('and a second line!!\n')
+... 
+>>> with open(data_filename, 'r') as rf, open('blah.txt', 'w') as wf:
+...     for line in rf:
+...             line = line.rstrip('\n')
+...             line = line.upper()
+...             wf.write(line + '\n')
+... 
+>>> 
+[kob734@hardin ~]$ logout
+
+Connection to hardin.it.northwestern.edu closed.
+dhcp-10-105-111-73:~ kbicknell$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
