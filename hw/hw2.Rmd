@@ -1,0 +1,93 @@
+---
+title: 'Ling 334: Homework 2'
+author: 'Instructor: Klinton Bicknell'
+output:
+  html_document:
+    highlight: pygments
+---
+
+_Turning it in._ You'll turn in your short answers in PDF form via Canvas. Your code will be 'turned in' by putting it in the `~/ling334/hw2/` folder, and running the command `chmod -R g+r ~/ling334/hw2/`{.bash} on the SSCC when you've finished. Remember to list all others you worked with at the top of your assignment. Also remember that you must do your own write-up and your own programming.
+
+For this assignment, we'll develop $n$-gram models using only a small part of the Brown corpus, to make it easier to find bugs and understand what's going on. The methods that you've learned at this point cannot be naively applied to very large datasets, so **please do not try to run any of these models on the full Brown corpus. It might crash the server for everyone.**
+
+## Unigram model
+
+1. **Creating the `word_to_index` dictionary** [Coding only: save code as `problem1.py`]
+  
+    The first step in building an $n$-gram model is to create a dictionary that maps words to indices (which we'll use to access the elements corresponding to that word in a vector or matrix of counts or probabilities). You'll create this dictionary from a vocabulary file that lists each word in the corpus exactly once:
+    ```python
+    nltk.data.path[0] + '/corpora/brown/brown_vocab_100.txt'
+    ```
+    This file lists the 811 word types used in the first 100 sentences of the Brown corpus and includes the special word types `<s>` and `</s>`, for a total of 813 word types. In this version of the Brown corpus, punctuation marks are also treated as words, so they are also included in this total. In the corpus itself, punctuation words are separated from other words by a space, just like other words are, so you won't need to treat them differently at all. The `brown_vocab_100.txt` file is formatted to contain one word per line. We want to create a dictionary in python that maps each word to its order of occurrence in this file, starting with 0. For example, the first word in the file is 'all' and this should map to 0. The last word is 'resolution' and this should map to 812. To create the dictionary in python, you'll iterate over each line (which is a word plus a newline character), use `rstrip()`{.python} to remove the trailing newline character, and then add the word to the dictionary mapped to its appropriate index. To do this, you'll need to keep track of which line of the file you're in using `enumerate()`{.python}.
+
+    After creating this dictionary, write the dictionary to a file called `word_to_index_100.txt`. Because `wf.write()`{.python} only writes strings, you will need to convert the dictionary to a string before you can write it using the `str()`{.python} function. To check that you've done this correctly, verify in the file output that 'all' is mapped to 0 and 'resolution' to 812.
+
+2. **Building an MLE unigram model** [Coding and written answer: save code as `problem2.py`]
+
+    Now you'll build a simple MLE unigram model from the first 100 sentences in the Brown corpus, found here:
+    ```
+    /sscc/home/k/kob734/nltk_data/corpora/brown/brown_100.txt
+    ```
+    This corpus is represented as one sentence per line with a space separating all words. You'll need to split the sentences into a list of words (e.g., using the string's `.split()`{.python} member function), convert each word to lowercase (e.g., using the string's `.lower()`{.python} member function) and add the end-of-sentence word `</s>`.
+
+    First, copy your code from problem 1 to load the dictionary mapping words to indices. Then `import numpy as np`{.python} and initialize the numpy vector of `counts` with zeros. Finally, iterate through the sentences and increment counts for each of the words they contain.
+
+    Now print the `counts` vector. (Do this in the python interpreter. Don't add this printing to your script.) _Q: Estimate (just by eyeballing) the proportion of the word types that occurred only once in this corpus. Do you think the proportion of words that occur only once would be higher or lower if we used a larger corpus (e.g., all 57000 sentences in Brown)? Why or why not?_
+
+    Finally, to normalize your counts vector and create probabilities, you can simply divide the counts vector by its sum in numpy like so:
+    ```python
+    probs = counts / np.sum(counts)
+    ```
+    Write your new `probs` vector to a file called `unigram_probs.txt` and verify that the first probability in it (the probability of 'all') is 0.0004223 and that the last probability (probability of 'resolution') is 0.00380068. (Note that our model trained on this small corpus has estimated that 'resolution' is about 10 times as frequent as 'all'! Models trained on very small corpora are very noisy.)
+
+## Bigram models
+
+3. **Building an MLE bigram model** [Coding only: save code as `problem3.py`]
+
+    Now, you'll create an MLE bigram model, in much the same way as you created an MLE unigram model. I recommend writing the code again from scratch, however (except for the code initializing the mapping dictionary), so that you can test things as you go. The main differences between coding an MLE bigram model and a unigram model are:
+    * you'll initialize a numpy matrix instead of a numpy vector
+    * you'll increment counts for a combination of word and previous word. This means you'll need to keep track of what the previous word was. I recommend doing this by (1) initializing `previous_word = '<s>'`{.python} just prior to the `for`{.python} loop iterating through a line, and then (2) inside the `for`{.python} loop, adding a line that sets `previous_word = word`{.python} _after_ incrementing the counts for the current `previous_word, word` pair. Think this through to make sure you understand why this ensures that the variable `previous_word` will always be the appropriate previous word when incrementing counts.
+    * you'll now normalize each row of the counts matrix instead of just normalizing a single counts vector. To do that, replace the line involving `np.sum()`{.python} with the lines
+    ```python
+    from sklearn.preprocessing import normalize
+    probs = normalize(counts, norm='l1', axis=1)
+    ```
+
+    When complete, add code to write the following probabilities to `bigram_probs.txt`, one per line:
+    * $p(\mbox{the} | \mbox{all})$
+    * $p(\mbox{jury} | \mbox{the})$
+    * $p(\mbox{campaign} | \mbox{the})$
+    * $p(\mbox{calls} |  \mbox{anonymous})$
+    
+    Make sure that the first two of these probabilities are 1.0 and about .08333.
+
+4. **Add-$\delta$ smoothing the bigram model** [Coding and written answer: save code as `problem4.py`]
+
+    This time, copy `problem3.py` to `problem4.py`. We'll just be making a very small modification to the program to add smoothing. In class, we discussed two types of smoothing in detail: Laplace smoothing, in which 1 _pseudocount_ is added to every bigram count, and add-$\delta$ smoothing, in which some amount $\delta$ is added to every bigram count. (Laplace smoothing is thus a special case of add-$\delta$ smoothing.)
+
+    You should modify your problem to use add-$\delta$ smoothing with $\delta=0.1$, i.e., pretending that we saw an extra one-tenth of an instance of each bigram. With numpy, you can very simply add 0.1 to every cell of a matrix like so:
+    ```python
+    counts += 0.1
+    ```
+    Now also change the program to write the same four probabilities as before to a file called `smooth_probs.txt`. To verify that your program is working correctly, check that the first probability in the file is about 0.0133657.
+
+    Finally, compare `smooth_probs.txt` to `bigram_probs.txt`. _Q: Why did all four probabilities go down in the smoothed model?_ Now note that the probabilities did not all decrease by the same amount. In particular, the two probabilities conditioned on 'the' dropped only slightly, while the other two probabilities (conditioned on 'all' and 'anonymous') dropped rather dramatically._Q: Why did add-$\delta$ smoothing cause probabilities conditioned on 'the' to fall much less than these others? And why is this behavior (causing probabilities conditioned on 'the' to fall less than the others) a good thing?_ In figuring this out, you may find it useful to look at the relevant individual rows of the counts matrix (prior to adding the 0.1) to see how they're different. In numpy, you can look at $n$th row of the `counts` matrix using `counts[n,]`.
+
+## Using $n$-gram models
+
+5. **Calculating sentence probabilities** [Coding and written answer]
+
+    For this problem, you will use each of the three models you've constructed in problems 2--4 to
+evaluate the probability of a toy corpus of sentences (containing just two sentences) found at
+    ```python
+    nltk.data.path[0] + '/corpora/brown/toy_corpus.txt'
+    ```
+    The sentences are contained in this corpus in the same format as the other corpora you've been using so far: one sentence per line and words separated by a space. As before, you'll need to remove the end-of-line character and add the end-of-sentence word.
+
+    First, you'll edit `problem2.py`, and add code at the bottom of the script to iterate through each sentence in the toy corpus and calculate the joint probability of all the words in the sentence under the unigram model. Then write the probability of each sentence to a file `unigram_eval.txt`, formatted to have one probability for each line of the output file. To do this, you'll be writing a loop within a loop very similarly to how you iterated through the training corpus to estimate the model parameters. But instead of incrementing counts after each word, you'll be updating the joint probability of the sentence (multiplying the probabilities of each word together). One easy way to do this is to initialize `sentprob = 1`{.python} prior to looping through the words in the sentence, and then just update `sentprob *= wordprob`{.python} with the probability of each word. At the end of the loop, `sentprob`{.python} will contain the total joint probability of the whole sentence. To verify that this worked correctly, note that the joint probability of the second sentence under this model should be 4.02570898843e-26.
+
+    Next, you'll transform this joint probability into a perplexity (of each sentence), and write that to the file instead. To calculate the perplexity, first calculate the length of the sentence in words (be sure to include the end-of-sentence word) and store that in a variable `sent_len`{.python}, and then you can calculate `perplexity = 1/(pow(joint_prob, 1.0/sent_len))`{.python}, which reproduces the definition of perplexity we discussed in class. Now, write the perplexity of each sentence to the output file instead of the joint probabilities. To verify that you've done this correctly, note that the perplexity of the second sentence with this model should be about 130.7.
+
+    Now, you'll do the same thing for your other two models. Add code to `problem3.py` to calculate the perplexities of each sentence in the toy corpus and write that to a file `bigram_eval.txt`. Similarly, add code to `problem4.py` and write the perplexities under the smoothed model to `smoothed_eval.txt`. To verify that you did these correctly, note that the perplexity of the second sentence should be about 6.2 with the MLE bigram model and about 40.2 for the smoothed bigram model.
+
+    Compare the perplexities of these two sentences under all three models. _Q: Which model performed worst and why might you have expected that model to have performed worst?_ Note the large difference in perplexities between the MLE and smoothed bigram models. _Q: Did smoothing help or hurt the model's 'performance' when evaluated on this corpus? Why might that be?_
