@@ -1,0 +1,58 @@
+---
+title: 'Ling 334: Final project'
+author: 'Instructor: Klinton Bicknell'
+output:
+  html_document:
+    highlight: pygments
+---
+
+The final project consists of two parts described below: an initial proposal and a final report. Generally, I recommend working on final projects in pairs, but working individually is also fine. These projects should be a bit larger in scope than one of homeworks. There are two options for final projects.
+
+## Project Details
+
+### Option 1: corpus analysis
+
+In this option, students will identify and investigate a question of interest about language using the methods you've learned in this class:
+
+* searching text `grep`
+* searching syntactic trees `tgrep`
+* $n$-gram models
+* hidden Markov models (HMMs)
+* etc.
+
+Students will select one or more corpora to apply these methods to (see 'Corpus selection' below).
+
+A few examples of option-1 projects from previous years:
+
+* comparing features of Australian, Canadian, and American English
+* performing authorship analysis of New Testament letters attributed to Paul with n-gram models
+* determining how noun phrase structures change over time in young children acquiring language
+* using HMMs to quantify word-order differences across Spanish and English
+* determining whether English changed more from 1900 to 1950 or from 1950 to 2000 using the Google books data and n-gram models
+
+### Option 2: advanced computational model
+
+In this option, students will implement an advanced computational model that goes beyond what was done for the homework. Generally, this will require both a training corpus and a test corpus to demonstrate that the model works (see 'Corpus selection' below). Many topics described at only a relatively high level in class are appropriate (e.g., unsupervised HMM training, parts of automatic speech recognition, machine translation, etc.). Additionally, the Jurafsky & Martin textbook describes many other advanced computational models that would be appropriate, even if they weren't touched on in class.
+
+A few examples of option-2 projects from previous years:
+
+* implementing Kneser-Ney smoothing
+* performing sentiment analysis on congressional speeches
+* training an HMM via the Baum-Welch algorithm
+* comparing a range of metrics for determining similarity between short posts on Yik Yak
+
+### Corpus selection
+
+If you don't already have a specific corpus in mind, I can suggest one in response to your proposal. Just make sure it's clear what kind of annotation you need in the corpus. E.g., some corpora contain just text, some contain part-of-speech tags for each word, some contain syntactic trees for each sentence, etc.
+
+
+## Submittables
+
+### Project proposals
+
+Students will submit a proposal (of about a page in length) that describes in detail the planned final project. Of course each proposal should make it clear who is on the team. I will give feedback about the proposals, which students should take into account before completing the project. You'll turn in your project proposal as a PDF via Canvas: just one proposal per team. (No need for all team members to submit duplicate copies.)
+
+
+### Final reports
+
+Students will submit a final report that describes the details of what you did, what you found, and also describe where your code is saved on the SSCC. The code should be found on the SSCC under one team member's `ling334/project` directory. Whichever team member this is should make sure to run the command `chmod -R g+r ~/ling334/project/`{.bash} on the SSCC when finished, so that I can access the code. The reports should be about 5--10 pages in length. For option 1, make sure to be very clear about the research question, why your method is a good way to test that question, and what hypotheses were supported by the results and why. For option 2, make sure to describe in detail how you implemented the model and why (including any design choices you made), your model evaluation results, and also describe the limitations of your model and evaluation procedure. You'll turn in your project proposal as a PDF via Canvas. As for the proposal, _only one team member should submit the report via Canvas_.
