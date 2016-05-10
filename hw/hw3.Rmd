@@ -1,0 +1,184 @@
+---
+title: 'Ling 334: Homework 3'
+author: 'Instructor: Klinton Bicknell'
+output:
+  html_document:
+    highlight: pygments
+---
+
+_Turning it in._ You'll turn in your short answers in PDF form via Canvas. Your code will be 'turned in' by putting it in the `~/ling334/hw3/` folder, and running the command `chmod -R g+r ~/ling334/hw3/`{.bash} on the SSCC when you've finished. Remember to list all others you worked with at the top of your assignment. Also remember that you must do your own write-up and your own programming.
+
+
+## More $n$-grams
+
+1. **Using the SRILM toolkit for $n$-gram modeling** [Written answers only]
+  
+    In the previous homework, you wrote your own python code to train and evaluate $n$-gram models, both using maximum likelihood estimation and using basic add-$\delta$ smoothing. In practice, $n$-gram models are popular enough that there are great off-the-shelf implementations so you don't have to code them yourself. These libraries also allow you to use more sophisticated smoothing techniques, which can be somewhat tricky even for advanced programmers to implement.
+    
+    For this problem, you'll learn how to use the SRILM toolkit to train and evaluate $n$-gram models. The SRILM toolkit contains two programs that are useful for this: `ngram-count`{.bash} estimates models (mostly) and `ngram`{.bash} applies and evaluates models (mostly). To use these programs, you'll need to add them to your path. To do that, run
+    ```bash
+    cat ~kob734/add_srilm_to_path >> ~/.bash_profile
+    ```
+    and then `logout` and log back in. To make sure it worked, run `ngram -version` and make sure that it outputs `SRILM release 1.7.0 (with third-party contributions)` (plus lots more stuff afterward).
+    
+    Now, we'll use `ngram-count`{.bash} to estimate a bigram model with add-$\delta$ smoothing, as you did in your homework. To do this, run the following command from your `ling334/hw3/` directory (the backslashes just continue the command on a new line):
+    ```bash
+    ngram-count \
+    -text ~kob734/nltk_data/corpora/brown/brown_100.txt \
+    -lm bigram_add_delta.lm \
+    -order 2 \
+    -tolower \
+    -addsmooth 0.1
+    ```
+    The lines of this command tell `ngram-count`{.bash} to:
+    * estimate a model from `brown_100.txt`
+    * save the model to a file called `bigram_add_delta.lm` (`lm` for language model)
+    * use a bigram model ($n$-gram order 2)
+    * convert all words to lowercase
+    * use add-$\delta$ smoothing with $\delta=0.1$.
+    
+    This should thus recreate the model you created in homework 2, problem 4.
+    
+    Now, use `ngram` to apply this model to our toy corpus andby calculate its perplexity:
+    ```bash
+    ngram \
+    -ppl ~kob734/nltk_data/corpora/brown/toy_corpus.txt \
+    -tolower \
+    -lm bigram_add_delta.lm
+    ```
+    The lines of line command tell `ngram`{.bash} to:
+    * calculate the perplexity of `toy_corpus.txt`
+    * convert all words to lowercase
+    * use the language model specified in `bigram_add_delta.lm`
+    
+    This should thus recreate what you did in homework 2, problem 5 (for the smoothed bigram model).
+    
+     The output provides a lot of information, including how many sentences had out-of-vocabulary words (OOVs) or zero probabilities under the model (zeroprobs), and also the log-likelihood of the corpus (logprob) and its perplexity (ppl). (You can ignore the final number (ppl1), which is the perplexity of the corpus excluding the end-of-sentence tokens.) In homework 2, you estimated the perplexity of these two sentences to be about 45 and about 40, and so it should be reassuring that the combined perplexity of these two sentences is right in between: about 42. This means that you've used these two commands to reproduce the most sophisticated model you built and tested in hw2.
+
+    One of the advantages of using SRILM instead of hand-coding is that it is easy to switch to a more advanced smoothing method. A common method that's essentially the state-of-the-art right now is interpolated modified Kneser-Ney smoothing (which we discussed briefly in class). You can change the previous `ngram-count`{.bash} command to use this smoothing method instead of add-$\delta$ by replacing `-addsmooth 0.1` with `-kndiscount -interpolate` and saving this new language model to a file called `bigram_kn.lm`.
+    Now, check the perplexity of our toy corpus under this new model. _Q: What is it? How much did using a better smoothing method improve it?_
+    
+    We can also easily switch to a trigram model instead of a bigram model, by changing `-order 2` to `-order 3`. Change the Kneser-Ney-smoothed model into a trigram
+model and save it as `trigram_kn.lm`. Then calculate the perplexity of our toy corpus with this model. _What is it? Did it improve? Why do you think this is?_
+    
+## HMMs by hand
+
+For the following questions, consider the following toy HMM, with corresponding transition matrix and emission matrix. Remember that the conditioning information is specified in the rows of the matrix, so that the $p(\mbox{N}|\mbox{V})$ is 0.6 and $p(\mbox{V}|\mbox{N})$ is 0.5.
+
+**Graphical model**
+
+<figure><img src="hmm.svg" style="width:500px"></figure>
+
+**Transition matrix**
+
+\     | Start | N   | A   | V   | End
+----- | ----- | --- | --- | --- | ---
+Start | 0     | 0.8 | 0.2 | 0   | 0
+N     | 0     | 0.3 | 0   | 0.5 | 0.2
+A     | 0     | 0.8 | 0.2 | 0   | 0
+V     | 0     | 0.6 | 0.2 | 0   | 0.2
+End   | 0     | 0   | 0   | 0   | 0
+
+**Emission matrix**
+
+\ | young | man | wall
+- | ----- | --- | ----
+N | 0.2   | 0.4 | 0.4
+A | 1     | 0   | 0
+V | 0     | 0.5 | 0.5
+
+2. **Simple inference in an HMM** [Written answers only]
+  
+    (a) Given this graphical model, factor the joint probability $p(w_1, w_2, w_3, t_1, t_2, t_3, t_4)$ into seven terms by using the conditional independence relationships specified by the model. Write this answer.
+
+    (b) What is the probability of $w_2=\mbox{man}$ given that $t_2=N$, i.e., $p(w_2=\mbox{man}|t_2=N)$?
+
+    (c) What is the probability of $w_2=\mbox{man}$ given that $t_1=N$, i.e., $p(w_2=\mbox{man}|t_1=N)$?
+    
+**Lattice**
+
+For the next two questions, consider the following Viterbi/forward algorithm lattice:
+
+<figure><img src="lattice.svg" style="width:500px"></figure>
+
+3. **The forward algorithm** [Written answers only (Bonus: coding)]
+
+    As we discussed in class, the forward algorithm is a way of calculating the probability of a string of words with an HMM, marginalizing over the tag sequence that generated the words. For this problem, calculate the probability of the sentence 'young man wall' under the HMM described above. Your write-up should list the calculations and the result at each node in the lattice (labeled as in the figure). For example:
+    
+    $N1: p(\mbox{N} | \mbox{start})p(\mbox{young} | \mbox{N}) = 0.8(0.2) = 0.16$
+    
+    Make sure to include the forward probability at the end node (i.e., your final answer).
+    
+    _Optional bonus_: For up to an extra point (i.e., 20\% of this assignment), you may write a python program saved as `problem3.py` that implements the forward algorithm and creates a text file containing these results (in the same format).
+
+4. **The Viterbi algorithm** [Written answers only (Bonus: coding)]
+
+    Now, use the lattice again to calculate the Viterbi probability at each node. Also mention for each node the backtrace (i.e., which node at the previous time step the most likely path originates from). After completing this, give the most likely sequence of parts-of-speech for this sentence, and the Viterbi probability of that sequence.
+
+    Finally, compute and report the probability of this most-likely sequence given that we know the words: i.e., $p(\mbox{tags}|\mbox{words})$. What other tag sequences do you think also have substantial probability?
+    
+      _Optional bonus_: For up to an extra point (i.e., 20\% of this assignment), you may write a python program saved as `problem4.py` that implements the Viterbi algorithm and creates a text file containing these results (in the same format).
+    
+## HMMs with Python
+
+5. **Training an HMM** [Coding only: save code as `problem5.py`]
+
+    For this assignment, you'll build and train an HMM using python. Recall that an HMM has two sets of parameters: the transition probabilities and the emission probabilities. Each of these can be stored in a numpy matrix, just like the parameters of the bigram model from homework 2. For homework 2, each row specified the previous word and each column gave the current word. Now, for the transition probabilities of the HMM, each row will specify the previous tag and each column will give the current tag. For the emission probabilities, each row will specify a tag and each column a word. When you initialize these, note that the transition matrix will be square, with both dimensions being equal to the number of tags, while the emission matrix will be rectangular, with the number of rows equal to the number of tags, but the number of columns equal to the number of words.
+
+    The training corpus you'll use can be found at
+
+        /sscc/home/k/kob734/nltk_data/corpora/brown/brown_100_pos.txt
+
+    In this corpus, as before, words are separated by spaces (and punctuation is again treated as a word). However, now, each word is combined with a tag with a slash, e.g.,
+    
+        The/AT cat/NN on/IN the/AT mat/NN ...
+
+    Thus, you'll iterate through each line, iterate through each word-tag pair in each line (after splitting it by spaces), and then split each word-tag-pair into a word and tag by splitting it on the `/`. As before, you'll need to make sure to make everything lowercase and add an end-of-sentence marker to each line. Because the `/` character is used to separate words from tags, you should use `'<end>'`{.python} instead of `'</s>'`{.python} as the end-of-sentence marker for this assignment.
+
+    Just like last time, you'll fill the matrix with counts by going through the corpus, and then normalize it using the same commands as last time. On each word-tag pair, you'll be updating two
+counts. You'll update the emission probability counts matrix with the current word and tag. Then, you'll update the tag transition matrix using the previous tag and current tag. You'll thus need to keep track of the previous tag, and initialize it at the beginning of each sentence with `'<s>'`{.python}.
+
+    You'll need to have a words-to-indices dictionary like last time, which you can initialize just like last time, but with this file now:
+
+        /sscc/home/k/kob734/nltk_data/corpora/brown/brown_words_hw3.txt
+    
+    Additionally, you'll need a tags-to-indices dictionary, which you'll initialize with this file:
+
+        /sscc/home/k/kob734/nltk_data/corpora/brown/brown_tags_hw3.txt
+
+    To verify that your emission probabilities are working properly, write the following probabilities to a file called `emission.txt` (one per line):
+
+    * $p(\mbox{weekend}|\mbox{nn})$
+    * $p(\mbox{texas}|\mbox{np})$
+    * $p(\mbox{to}|\mbox{to})$
+    * $p(\mbox{old}|\mbox{jj})$
+
+    The first two of these should equal 0.00302114803625 and 0.018691588785.
+
+    To verify that your transition probabilities are working properly, write the following probabilities to a file called `transition.txt` (one per line):
+
+    * $p(\mbox{nn}|\mbox{nn})$
+    * $p(\mbox{.}|\mbox{nn})$
+    * $p(\mbox{<end>}|\mbox{.})$
+    * $p(\mbox{vb}|\mbox{to})$ [note: this is the tag `to', not the word]
+    
+    The first two of these should equal 0.132930513595 and 0.0876132930514.
+    
+6. **Evaluating an HMM** [Written answers and coding: modify `problem5.py`]
+
+    As the final problem, you'll add code to the bottom of `problem5.py` to calculate the probability of this toy corpus:
+
+        /sscc/home/k/kob734/nltk_data/corpora/brown/toy_pos_corpus.txt
+
+    Specifically, you'll calculate the full probability of each sentence of the corpus, including all the tags and all the words $p(w, t)$. Write these probabilities to a file `pos_eval.txt`, one per line. If everything is working correctly, the second of these should equal 1.42536540182e-17.
+
+    Look at the toy corpus and you'll see that it contains just two lines: the same words with two different part-of-speech tag sequences. Which one is assigned higher probability? (Note: These numbers are all in scientific notation, so e-15 means $\times 10^{-15}$.) Do you have any
+intuitions why that might be? The tag meanings are as follows:
+
+  tag | meaning
+  --- | -------
+  NN  | common noun
+  TO  | infinitive marker _to_ (e.g., 'to dream')
+  IN  | preposition
+  VB  | verb
+  JJ  | adjective
