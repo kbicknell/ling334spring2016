@@ -279,11 +279,11 @@ The lines of line command tell <code class="sourceCode bash"><span class="kw">ng
 <p>As we discussed in class, the forward algorithm is a way of calculating the probability of a string of words with an HMM, marginalizing over the tag sequence that generated the words. For this problem, calculate the probability of the sentence ‘young man wall’ under the HMM described above. Your write-up should list the calculations and the result at each node in the lattice (labeled as in the figure). For example:</p>
 <p><span class="math">\(N1: p(\mbox{N} | \mbox{start})p(\mbox{young} | \mbox{N}) = 0.8(0.2) = 0.16\)</span></p>
 <p>Make sure to include the forward probability at the end node (i.e., your final answer).</p>
-<p><em>Optional bonus</em>: For up to an extra point (i.e., 20% of this assignment), you may write a python program saved as <code>problem3.py</code> that implements the forward algorithm and creates a text file containing these results (in the same format).</p></li>
+<p><em>Optional bonus</em>: For up to an extra point (i.e., 1/6 of this assignment), you may write a python program saved as <code>problem3.py</code> that implements the forward algorithm and creates a text file containing these results (in the same format).</p></li>
 <li><p><strong>The Viterbi algorithm</strong> [Written answers only (Bonus: coding)]</p>
 <p>Now, use the lattice again to calculate the Viterbi probability at each node. Also mention for each node the backtrace (i.e., which node at the previous time step the most likely path originates from). After completing this, give the most likely sequence of parts-of-speech for this sentence, and the Viterbi probability of that sequence.</p>
 <p>Finally, compute and report the probability of this most-likely sequence given that we know the words: i.e., <span class="math">\(p(\mbox{tags}|\mbox{words})\)</span>. What other tag sequences do you think also have substantial probability?</p>
-<p><em>Optional bonus</em>: For up to an extra point (i.e., 20% of this assignment), you may write a python program saved as <code>problem4.py</code> that implements the Viterbi algorithm and creates a text file containing these results (in the same format).</p></li>
+<p><em>Optional bonus</em>: For up to an extra point (i.e., 1/6 of this assignment), you may write a python program saved as <code>problem4.py</code> that implements the Viterbi algorithm and creates a text file containing these results (in the same format).</p></li>
 </ol>
 </div>
 <div id="hmms-with-python" class="section level2">

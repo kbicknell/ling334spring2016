@@ -109,7 +109,7 @@ For the next two questions, consider the following Viterbi/forward algorithm lat
     
     Make sure to include the forward probability at the end node (i.e., your final answer).
     
-    _Optional bonus_: For up to an extra point (i.e., 20\% of this assignment), you may write a python program saved as `problem3.py` that implements the forward algorithm and creates a text file containing these results (in the same format).
+    _Optional bonus_: For up to an extra point (i.e., 1/6 of this assignment), you may write a python program saved as `problem3.py` that implements the forward algorithm and creates a text file containing these results (in the same format).
 
 4. **The Viterbi algorithm** [Written answers only (Bonus: coding)]
 
@@ -117,7 +117,7 @@ For the next two questions, consider the following Viterbi/forward algorithm lat
 
     Finally, compute and report the probability of this most-likely sequence given that we know the words: i.e., $p(\mbox{tags}|\mbox{words})$. What other tag sequences do you think also have substantial probability?
     
-      _Optional bonus_: For up to an extra point (i.e., 20\% of this assignment), you may write a python program saved as `problem4.py` that implements the Viterbi algorithm and creates a text file containing these results (in the same format).
+      _Optional bonus_: For up to an extra point (i.e., 1/6 of this assignment), you may write a python program saved as `problem4.py` that implements the Viterbi algorithm and creates a text file containing these results (in the same format).
     
 ## HMMs with Python
 
