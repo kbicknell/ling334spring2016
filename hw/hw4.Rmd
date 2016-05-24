@@ -1,0 +1,123 @@
+---
+title: 'Ling 334: Homework 4'
+author: 'Instructor: Klinton Bicknell'
+output:
+  html_document:
+    highlight: pygments
+---
+
+_Turning it in._ You'll turn in your short answers in PDF form via Canvas. Your code will be 'turned in' by putting it in the `~/ling334/hw4/` folder, and running the command `chmod -R g+r ~/ling334/hw4/`{.bash} on the SSCC when you've finished. Remember to list all others you worked with at the top of your assignment. Also remember that you must do your own write-up and your own programming.
+
+
+## Noisy-channel models
+
+1. **Autocorrect** [Written answers and coding: save code as `problem1.py`.]
+
+    For this problem, you'll be implementing a noisy-channel based autocorrect system. In particular, you'll be implementing the system for a particular example. A user has typed "I'm running larw" and the system will be determining what it should correct "larw" into (assuming that "I'm running" was typed correctly.) In case you haven't ever noticed yourself type this one, note that the string "rw" can be typed by just shifting the whole hand slightly to the left when intending to type "te", so we probably have a good intuition for what the user really did intend to type here. The question is whether we can get a very simple autocorrect system to agree with us.
+
+    Recall from class that the goal of an autocorrect system is to find likely intended words $w$ given what a user actually typed "larw", i.e., to find a value of $w$ that makes $p(w|\mbox{larw})$ large. Bayes' rule tells us that we can calculate the posterior on $p(w|\mbox{larw})$ by multiplying together two components, (1) the probability that word $w$ would have been intended in this context $p(w)$ (the prior), and (2) the probability that a user intending to produce $w$ would actually have typed what they typed $p(\mbox{larw}|w)$ (the likelihood), and then normalizing so that the probabilities of all possible intended words $w$ sum to 1.
+
+    The first component of this can be calculated from a language model, such as the $n$-gram models or HMMs that you implemented on previous homeworks. But since you've already implemented these, for this homework, I've already calculated these probabilities for you. In particular, I trained a Kneser-Ney-smoothed bigram model on a reasonably large corpus (the British National Corpus, 100 million words), and used it to calculate the probabilities of a set of about 700 candidate words to follow the word "running". You'll just be reading these probabilities from a file.
+
+    The second component is a noise model. I have also already calculated this for you. I used a very, very simple noise model in which three of the error types have equal probability (deletion, insertion, substitution), and the fourth error type (transposition) is not even considered. These probabilities are not conditioned at all on the precise letters involves in the error, so for example, if a user intended to type "te", there is equal probability that they accidentally typed "rw" as that they accidentally typed "qm". You'll be reading these probabilities from a file as well.
+
+    What you'll need to do is first build a dictionary mapping words to indices (as in the previous two assignments) by reading the file
+    ```
+    /sscc/home/k/kob734/hw4materials/vocab.txt
+    ```
+    This vocabulary file includes the 669 fully alphabetic words in the BNC that differ from what was actually typed ("larw") by at most two errors. In addition to building a word-to-index dictionary, you should also build an object (dictionary or list) that maps in the other direction, index-to-word.
+
+    With those dictionaries in place, you'll build `numpy` vectors for the language model probabilities and the noise probabilities. In particular, you should initialize these two vectors to have the same length as the number of words in the vocabulary. Then iterate through the following two files to initialize each vector:
+    ```
+    /sscc/home/k/kob734/hw4materials/lm.txt
+    /sscc/home/k/kob734/hw4materials/noise.txt
+    ```
+    The formats of these two files is identical. Each line contains a word and a probability, separated by a tab. You'll need to use the word-to-index dictionary to figure out which element corresponds to each probability.
+
+    With those two vectors in place, you can calculate the posterior probabilities by multiplying them together and then normalizing:
+    ```python
+    unnorm_posterior = langprobs * noiseprobs
+    posterior = unnorm_posterior / np.sum(unnorm_posterior)
+    ```
+    The numpy vector `posterior`{.python} now gives the posterior probability of each word having been actually intended given the input "larw" in the context of "running", according to the model.
+    
+    _Q: Which word does the model think this is most likely to have been? If the answer is not what we know is actually the most likely answer ("late"), is it a reasonable guess? Why or why not?_ To answer this question, note that you can get the index of the maximum value in a vector by using numpy's `argmax()`{.python} function, e.g., `max_idx = np.argmax(posterior)`{.python}. The index-to-word mapping you constructed above will also come in handy here. To check your code, ensure that the model is assigning a probability of about 0.317897 to this most likely word.
+    
+    Given that the model is assigning a probability of only about 1/3 to the word it thinks was most likely intended (and thus is not very sure what was intended), we can get a fuller sense of the model's inferences by looking at other words that have substantial posterior probability. In order to investigate this, note that the `np.where()` function can be used to find the entries in a matrix that meet a particular threshold. For example, `np.where(x > threshold)[0]`{.python} will return a list of the indices of a vector that correspond to values above `threshold`.
+    
+    _Q: Which words does the model assign a posterior probability higher than 0.05 to, and what probabilities does it assign to each of these? Is "late"   in this list? Do all of the words in this list seem like reasonable guesses to you for what was intended? Why or why not?_
+    _Q: If you were developing this autocorrect system, which part of the model would you improve next to improve the model's performance? Why?_
+
+## Searching treebanks
+
+2. **A questionable rule** [Written answers only.]
+
+    In the Penn Treebank (the syntactically annotated corpus we discussed in class -- easily the most widely used syntactically annotated corpus), determiners like "the" have the preterminal category `DT`. It might be surprising, then, that the corpus has a number of instances of a rule `NP` $\rightarrow$ `DT`, i.e., a noun phrase rewriting as just a determiner with no noun. Combined with a standard rule like `S` $\rightarrow$ `NP VP`, this makes sentences like "The walked down the street." actually grammatical in a grammar learned from the Penn Treebank. It is thus quite surprising that the Treebank contains such rules! To investigate, you'll use `tregex` to determine what this rule is being used for, and how it could ever be grammatical.
+
+    On the SSCC, you can run `tregex` on the Penn Treebank like so
+    ```bash
+    ~kob734/tregex/tregex.sh 'PATTERN' ~kob734/nltk_data/corpora/treebank/combined/
+    ```
+    To find all the instances in the corpus of an `NP` rewriting as just a `DT`, note that `X <: Y` asks `tregex` to find an `X` category whose only child is `Y`. In order to gain more insight into what's going on here, note that you can pass the command-line flag `-w` to `tregex`, by placing it between `tregex.sh`{.bash} and the pattern, to request that `tregex` show the full sentence for each sentence that contains a constituent matching the pattern (instead of just showing the constituent itself, as it the default behavior).
+
+    Additionally, because syntactic corpora often contain annotation on nodes (for example, having an `NP-SUBJ` category in addition to `NP`), it is often the case that we want searches to ignore annotation. By default, if you ask `tregex` to match `NP` nodes, it will only match nodes labeled exactly `NP`, and not `NP-SUBJ`. To request that it match all `NP` nodes, whether annotated or not, replace `NP` in the pattern with `@NP`. You should ignore annotation in all your searches for this homework.
+    
+    _Q: How many instances of the `NP` $\rightarrow$ `DT` rule are there in the corpus? Looking at the matches in detail, what grammatical structure is this rule generally being used for? How could we change the grammar used in the Penn Treebank such that it allowed this (grammatical) structure but didn't allow ungrammatical structures like "The walked down the street."_
+
+3. **Context-sensitivity in prepositions** [Written answers only.]
+
+    All the grammars we have talked about in this class are context-free. What this means is that the probabilities of a nonterminal rewriting in various ways doesn't depend on its context. For example, in a PCFG, the probability that a prepositional phrase `PP` has a preposition like "in" as its first word is independent of whether that `PP` is embedded in a noun phrase ("the cat in the hat") or embedded in a verb phrase ("was in the house"). In this question, you'll test this assumption empirically.
+
+    Specifically, you should count the number of times each of four common prepositions -- "in", "on", "for", and "to" -- heads a `PP` that is a daughter of an `NP` and the number of times they head a `PP` that is a daughter of a `VP`.
+
+    A few helpful notes about using `tregex` for this:
+    * You can use the command-line flag `-C` to omit printing the results and just print the total count of matches instead
+    * Remember how multiple rules combine in a pattern. For example, `X > Y < Z` matches an `X` category that has a `Y` as a parent and a `Z` as a child.
+    * `tregex` has an is-headed-by operator `<<#`, so `NP <<# dog` matches `NP` categories whose head `N` is "dog".
+
+    _Q: How many times do PPs headed by each of the four prepositions appear in each of the two types of phrase? Do there appear to be systematic differences between the two contexts in terms of which prepositions PPs tend to rewrite as, and if so, do you have any intuitions for what might explain them? How could we change our grammar using nonterminal annotation to allow the grammar to reflect this context sensitivity?_
+
+## Parsing with context-free grammars
+
+**Probabilistic context-free grammar for problem 4**
+
+rule                  | probability
+--------------------- | -----------
+`S` $\rightarrow$ `NP` `VP` | 0.8
+`S` $\rightarrow$ `VP` | 0.2
+`NP` $\rightarrow$ `PRP` | 0.3
+`NP` $\rightarrow$ `D` `N` | 0.5
+`NP` $\rightarrow$ `NP` `PP` | 0.2
+`VP` $\rightarrow$ `V` `NP` | 0.5
+`VP` $\rightarrow$ `VP` `PP` | 0.3
+`VP` $\rightarrow$ `V` | 0.2
+`PP` $\rightarrow$ `P` `NP` | 1 
+`PRP` $\rightarrow$ he | 1
+`N` $\rightarrow$ saw | 0.4
+`N` $\rightarrow$ girl | 0.5
+`N` $\rightarrow$ telescope | 0.1
+`V` $\rightarrow$ telescope | 0.2
+`V` $\rightarrow$ saw | 0.8
+`D` $\rightarrow$ the | 1
+`P` $\rightarrow$ with | 1
+
+4. **Probabilistic parsing** [Written answers (+ optional bonus coding)]
+
+    The sentence "He saw the girl with the telescope." is a relatively famous example of syntactic ambiguity in linguistics. _Q: What are the two meanings? Which do you think is more likely, and why?_
+
+    Using the grammar given in the table above, find the most likely parse of this sentence using the probabilistic CKY algorithm. In particular, you should turn in a completely filled out parse table, labeling in each cell:
+    * the indices of that cell (e.g., [0,2])
+    * each possible category for that cell, along with its probability and pointers to the one or two categories that compose to form it. The pointers should be represented not as arrows but as text, as in this example cell (not from this parse chart):
+    ```
+    cell [0,3]
+    S: p = 0.002, VP[0,3]
+    VP: p = 0.004, V[0,1] NP[1,3]
+    ```
+
+    This example cell indicates that an S could be formed in this cell with probability 0.002 from a unary rewrite of a VP spanning indices 0 to 3, and a VP could be formed with probability 0.004 from combining a V spanning indices 0 to 1 with an NP spanning 1 to 3.
+    
+    _Optional bonus:_ You may write a python program saved as `problem4.py` that implements probabilistic CKY and creates this same parse chart as a file `parsechart.txt` in the same format as the text example above. Cells in the chart should appear sequentially and be in row order, so that cell [1, 4] precedes cell [2, 1]. This bonus problem is worth up to an additional 1 point on this assignment (out of 4). You may find the Jurafsky & Martin textbook helpful in specifying this algorithm in pseudocode. Note, however, that the pseudocode in the book assumes that the grammar is in Chomsky Normal Form, without unaries. Since our grammar contains unary rules you must modify that algorithm slightly.
+    
+    _Q: Which parse does this grammar say is most likely? Write out this most likely parse as a tree. Which interpretation does this parse correspond to? What are the main reasons why this grammar prefers that parse? E.g., which probabilities of the grammar could you change to make the other parse be preferred?_
+    
+    _Q: What other local ambiguities did the parse table reveal in this sentence? Describe a few, and why they are ambiguous in context._
